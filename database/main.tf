@@ -6,26 +6,13 @@ data "terraform_remote_state" "network" {
   }
 }
 
-module "encryption_key" {
-  source = "git::https://gitlab.com/eponas/epona.git//modules/aws/patterns/encryption_key?ref=v0.2.0"
-
-  kms_keys = [
-    { alias_name = "alias/teams-test-encryption-key" }
-  ]
-
-  tags = {
-    Owner     = "teams-test"
-    ManagedBy = "epona"
-  }
-}
-
 module "database" {
   source = "git::https://gitlab.com/eponas/epona.git//modules/aws/patterns/database?ref=v0.2.0"
 
   name = "teams_test"
 
-  username = "postgres"
-  password = "Passw0rd"
+  username = data.aws_ssm_parameter.username.value
+  password = data.aws_ssm_parameter.password.value
 
   deletion_protection = false
 

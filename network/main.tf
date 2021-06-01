@@ -15,6 +15,7 @@ module "network" {
   public_subnets             = ["192.168.1.0/24", "192.168.2.0/24"]
   private_subnets            = ["192.168.3.0/24", "192.168.4.0/24"]
   nat_gateway_deploy_subnets = ["192.168.1.0/24", "192.168.2.0/24"]
+  flow_log_enabled           = false
 }
 
 output "network" {
