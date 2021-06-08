@@ -52,6 +52,3 @@ module "database" {
   skip_final_snapshot               = true
 }
 
-resource "aws_sns_topic" "teams-test" {
-  name = "teams_test"
-}
